@@ -30,8 +30,9 @@ public class MyPanel extends JPanel implements MouseListener {
         this.previousWorldUpdateTime = System.currentTimeMillis();
         this.addMouseListener(this);
         //world.createTestWorld();
-        world.createFirstWorld();
+        world.createFinaleWorld();
         world.createEnemies();
+        world.createEnemySnyps();
         world.createChests();
         System.out.println(x0 + ", " + y0 + " : " + xN + ", " + yN);
     }
@@ -54,17 +55,31 @@ public class MyPanel extends JPanel implements MouseListener {
             g.setColor(new Color(0xFF000D01));
             //g.setColor(new Color(0x86DBD071, true));
             g.fillRect(0, 0, (int) frameWidth, (int) frameHeight);
-            g.setColor(Color.black);
+
+            //g.setColor(Color.black);
         }
 
 
         world.drawWalls(g);
         world.drawChest(g);
 
+
+
+        if (character.startGame) {
+            g.setColor(new Color(0xFF000D01));
+            g.fillRect(0, 0, 1015, 50);
+            g.setColor(Color.white);
+            g.drawRect(0, 0, 1000, 50);
+            g.setColor(new Color(0xFF000D01));
+        }
+
         character.draw(g);
         world.drawEnemies(g);
+        world.drawEnemySnyps(g);
+
         character.drawHealth(g);
         character.drawGameOver(g);
+        menu.drawPause(g);
 
 
     }
@@ -75,6 +90,8 @@ public class MyPanel extends JPanel implements MouseListener {
 
         world.checkEnemyWalls();
         world.checkAnotherEnemy();
+        world.checkFireBalls();
+        world.damageByBall();
 
         character.update(dt);
         world.updateEnemies(dt);
@@ -87,7 +104,8 @@ public class MyPanel extends JPanel implements MouseListener {
     @Override
     public void mouseClicked(MouseEvent e) {
 
-        menu.clikStart(e);
+        menu.clickStart(e);
+        menu.clickPause(e);
 
         world.updateCharacterDamage(e);
         world.openChest(e);

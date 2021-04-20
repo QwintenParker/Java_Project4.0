@@ -1,7 +1,7 @@
 import java.awt.*;
 import java.awt.event.MouseEvent;
 
-public class Enemy {
+public class EnemySnyp {
 
     public double x;
     public double y;
@@ -22,15 +22,15 @@ public class Enemy {
     public boolean go;
     private long previousWorldUpdateTime;
 
-    public Enemy(double x, double y, Character character) {
+    public EnemySnyp(double x, double y, Character character) {
         this.x = x;
         this.y = y;
         this.width = 40;
         this.height = 40;
         this.xH = x + 5;
         this.yH = y - 10;
-        this.enemySpeedX = 0.15;
-        this.enemySpeedY = 0.15;
+        this.enemySpeedX = 0.17;
+        this.enemySpeedY = 0.17;
         this.character = character;
         this.enemyGoX = 0;
         this.enemyGoY = 0;
@@ -47,12 +47,12 @@ public class Enemy {
     public void draw(Graphics g) {
         if (character.startGame) {
             if (drawEnemy) {
-                g.setColor(Color.MAGENTA);
+                g.setColor(Color.cyan);
                 g.fillRect((int) x, (int) y, (int) width, (int) height);
                 g.setColor(Color.black);
                 g.drawRect((int) x, (int) y, (int) width, (int) height);
                 if (drawHealth) {
-                    g.setColor(Color.blue);
+                    g.setColor(Color.ORANGE);
                     g.drawString(String.valueOf(enemyHealth), (int) xH, (int) yH);
                     g.setColor(Color.black);
                 }
@@ -78,32 +78,27 @@ public class Enemy {
 
 
 
-                if (x >= character.x - 40 && x + width <= character.x + 90 && y >= character.y - 40 && y + height <= character.y + 90) {
+                if ((x + width <= character.x - 50 || x >= character.x + character.width + 50) && (y + height <= character.y - 50 || y >= character.y + character.height + 50)) {
                     enemyGoX = 0;
                     enemyGoY = 0;
-                    //    go = false;
                 } else {
-                    //if (go) {
-                    if (character.x + 25 > x + 22) {
+                    if (character.x + character.width > x - 50) {
                         enemyGoX = 1;
-                    } else if (character.x + 25 < x + 18) {
+                    } else if (character.x < x + width + 50) {
                         enemyGoX = -1;
-                    } else if (character.x + 25 <= x + 22 && character.x + 25 >= x + 18) {
+                    } else if (x + width <= character.x - 50 || x >= character.x + character.width + 50) {
                         enemyGoX = 0;
                     }
-                    //}
 
 
-                    //if (go) {
-                    if (character.y + 25 > y + 22) {
+                    if (character.y + character.height > x - 50) {
                         enemyGoY = 1;
-                    } else if (character.y + 25 < y + 18) {
+                    } else if (character.y < y + height + 50) {
                         enemyGoY = -1;
-                    } else if (character.y + 25 <= y + 22 && character.y + 25 >= y + 18) {
+                    } else if (y + height <= character.y - 50 || y >= character.y + character.height + 50) {
                         enemyGoY = 0;
                     }
-                    //}
-                    //    go = true;
+
                 }
 
 
@@ -118,7 +113,7 @@ public class Enemy {
                     y += enemyGoY * enemySpeedY * dt;
                     xH += enemyGoX * enemySpeedX * dt;
                     yH += enemyGoY * enemySpeedY * dt;
-                    drawHealth = true;
+                    //drawHealth = true;
 
                 }
 

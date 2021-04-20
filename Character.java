@@ -31,12 +31,14 @@ public class Character {
     public boolean startGame;
     public double dtX;
     public double dtY;
-    public double nX;
-    public double nY;
+    public boolean pause;
     public Font font1;
     public Font font2;
+    public Font font3;
     public ArrayList<FireBall> balls = new ArrayList<>();
-    public int countBalls;
+    public long previousWorldUpdateTime;
+    public int maxBalls;
+    public boolean gameOver;
 
 
     public Character(double x, double y) throws IOException {
@@ -51,17 +53,22 @@ public class Character {
         this.yRunningSpeed = 0.2;
         this.runningX = 0;
         this.runningY = 0;
-        this.characterHealth = 100;
+        this.characterHealth = 10000;
         this.canHit = false;
         this.startGame = false;
         this.gameOverImage = ImageIO.read(img1);
         this.isMoving = false;
-        this.maxHealth = 100;
+        this.maxHealth = 1000000;
         this.damageMax = 10;
         this.coins = 0;
         this.value = "BYTE";
+        this.font3 = new Font("TimesRomab", Font.PLAIN, 15);
         this.font2 = new Font("TimesRomab", Font.PLAIN, 12);
         this.font1 = new Font("TimesRoman", Font.BOLD, 30);
+        this.previousWorldUpdateTime = System.currentTimeMillis();
+        this.maxBalls = 10;
+        this.pause = false;
+        this.gameOver = false;
     }
 
     public void draw(Graphics g) {
@@ -72,8 +79,23 @@ public class Character {
             g.fillRect(imageX, imageY, (int) width, (int) height);
             g.setColor(Color.black);
             g.drawRect(imageX, imageY, (int) width, (int) height);
+
+            g.setFont(font3);
+            if (maxBalls > 0) {
+                g.setColor(Color.WHITE);
+                g.drawString("AMMO:", 800, 30);
+                g.drawString(String.valueOf(maxBalls), 850, 30);
+            } else {
+                g.setColor(Color.RED);
+                g.drawString("AMMO", 800, 30);
+                g.drawString(String.valueOf(maxBalls), 850, 30);
+            }
+            g.setFont(font2);
+            g.setColor(new Color(0xFF000D01, true));
+
             for (int i = 0; i < balls.size(); i++) {
                 (balls.get(i)).drawBall(g);
+                balls.get(i).num = i;
             }
         }
     }
@@ -81,14 +103,14 @@ public class Character {
     public void drawHealth(Graphics g) {
         if (startGame) {
             if (characterHealth > maxHealth) {
-                characterHealth = 100;
+                characterHealth = maxHealth;
             }
 
             g.setFont(font1);
-            g.fillRect(0, 0, 240, 48);
+            g.fillRect(1, 1, 240, 48);
 
             g.setColor(Color.green);
-            g.drawRect(0, 0, 240, 48);
+            g.drawRect(1, 1, 240, 48);
             g.drawString("HEALTH:", 10, 35);
             g.drawString(String.valueOf((int)characterHealth), 150, 35);
 
@@ -122,6 +144,7 @@ public class Character {
                 xRunningSpeed = 0;
                 yRunningSpeed = 0;
                 characterHealth = 0;
+                gameOver = true;
             }
         }
     }
@@ -167,7 +190,7 @@ public class Character {
     }
 
     public void update(long dt) {
-        if (startGame) {
+        if (startGame && !pause) {
             dtX = runningX * xRunningSpeed * dt;
             dtY = runningY * yRunningSpeed * dt;
 
@@ -199,14 +222,38 @@ public class Character {
 
             if (y > yN) {
                 world.changeLocation(3);
-                this.y = 1;
+                this.y = 51;
             }
         }
     }
 
     public void createFireBalls(MouseEvent e) {
-        if (e.getButton() == 3) {
-            balls.add(new FireBall(this, e.getX(), e.getY(), balls.size()));
+        long currentTime = System.currentTimeMillis();
+        if (characterHealth > 0 && !pause) {
+            if (maxBalls > 0) {
+                if (e.getButton() == 3 && e.getID() == MouseEvent.MOUSE_CLICKED) {
+                    if ((currentTime - previousWorldUpdateTime) >= 1000) {
+                        System.out.println(balls.size());
+                        balls.add(new FireBall(this, e.getX(), e.getY(), balls.size()));
+                        previousWorldUpdateTime = currentTime;
+                        maxBalls = maxBalls - 1;
+                    }
+                }
+            }
+
         }
+    }
+
+    public void removeBall(int n) {
+        int num1 = n;
+        balls.remove(num1);
+        System.out.println("R" + n);
+        //for (int i = 0; i < balls.size(); i++) {
+        //    if (balls.get(i).num > num1) {
+        //        balls.get(i).num = num1;
+        //    }
+        //    num1 = num1 + 1;
+//
+        //}
     }
 }

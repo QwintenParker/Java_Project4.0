@@ -21,7 +21,7 @@ public class FireBall {
         this.y = character.y + 20;
         xR = x - this.x;
         yR = y - this.y;
-        this.speed = 0.2;
+        this.speed = 1;
         this.num = i;
     }
 
@@ -34,5 +34,10 @@ public class FireBall {
     public void update(long dt) {
         this.x += speed * (xR/Math.sqrt(xR*xR + yR*yR)) * dt;
         this.y += speed * (yR/Math.sqrt(xR*xR + yR*yR)) * dt;
+
+        if (x > 1000 || x < 0 || y > 1000 || y < 0) {
+            character.removeBall(num);
+        }
+        //System.out.println(x);
     }
 }

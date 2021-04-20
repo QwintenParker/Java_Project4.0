@@ -41,15 +41,49 @@ public class Menu {
             g.setFont(font1);
             g.drawString("START", 415, 650);
             g.setFont(font2);
-            g.setColor(Color.black);
+            //g.setColor(Color.black);
         }
     }
 
-    public void clikStart(MouseEvent e) {
+    public void drawPause(Graphics g) {
+        if (startGame) {
+            g.setColor(Color.CYAN);
+            g.drawRect(960, 10, 30, 30);
+            g.drawLine(971, 18, 971, 32);
+            g.drawLine(979, 18, 979, 32);
+            g.setColor(new Color(0xFF000D01, true));
+
+            if (character.pause) {
+                g.setColor(Color.black);
+                g.fillRect(183, 200, 650, 700);
+                g.setColor(Color.CYAN);
+                g.drawRect(183, 200, 650, 700);
+                g.drawRect(400, 770, 230, 75);
+                g.setFont(font1);
+                g.drawString("RETURN", 413, 826);
+                g.drawString("PAUSE", 427, 270);
+            }
+        }
+    }
+
+    public void clickStart(MouseEvent e) {
         if (!startGame) {
             if (e.getX() > xS && e.getX() < xS + 188 && e.getY() > yS && e.getY() < yS + 80 && e.getButton() == 1) {
                 startGame = true;
                 character.startGame = true;
+            }
+        }
+    }
+
+    public void clickPause(MouseEvent e) {
+        if (startGame && !character.gameOver) {
+            if (e.getX() > 960 && e.getX() < 990 && e.getY() > 10 && e.getY() < 40 && e.getButton() == 1) {
+                character.pause = true;
+                System.out.println("YES");
+            }
+
+            if (e.getX() > 400 && e.getX() < 630 && e.getY() > 770 && e.getY() < 845 && e.getButton() == 1 && character.pause) {
+                character.pause = false;
             }
         }
     }

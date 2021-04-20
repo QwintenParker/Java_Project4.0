@@ -5,7 +5,7 @@ import java.io.IOException;
 public class Main {
     public static void main(String[] args) throws InterruptedException, IOException {
         JFrame frame = new JFrame();
-        frame.setSize(1015, 1090);
+        frame.setSize(1018, 1090);
         frame.setLocation(640, 200);
         frame.setTitle("EXTRANET");
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);

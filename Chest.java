@@ -27,7 +27,7 @@ public class Chest {
         this.opening = 0;
         this.canOpen = false;
         this.character = character;
-        this.stuff = (int) (Math.random() * 3);
+        this.stuff = (int) (Math.random() * 4);
         this.st = 0;
         System.out.println(stuff);
     }
@@ -94,7 +94,11 @@ public class Chest {
                     character.characterHealth = character.maxHealth;
                     st = 1;
                 } else if (stuff == 2) {
-                    character.coinsSum = character.coinsSum + (int) ((Math.random() * 100) + 10);
+                    character.coinsSum = character.coinsSum + (int) ((Math.random() * 101) + 10);
+                    st = 1;
+                } else if (stuff == 3) {
+                    character.maxBalls = character.maxBalls + (int) ((Math.random() * 11) + 10);
+                    System.out.println(character.maxBalls);
                     st = 1;
                 }
                 System.out.println(st);

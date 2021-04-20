@@ -15,8 +15,9 @@ public class Wall {
     public boolean wallR;
     public boolean wallU;
     public boolean wallD;
+    public int num;
 
-    public Wall(double x, double y, Character character, double width, double height) {
+    public Wall(double x, double y, Character character, double width, double height, int n) {
         this.x = x;
         this.y = y;
         this.width = width;
@@ -29,6 +30,7 @@ public class Wall {
         this.wallU = false;
         this.wallD = false;
         this.previousWorldUpdateTime = System.currentTimeMillis();
+        this.num = n;
     }
 
     public void checkObjects() {
@@ -56,27 +58,101 @@ public class Wall {
     public void checkObjects(Enemy enemy) {
         if (character.startGame) {
             if (enemy.x >= this.x && enemy.x <= this.x + width && enemy.y + enemy.height - 7 >= this.y && enemy.y + 7 <= this.y + height) {
-                enemy.x = x + width;
+                if (num == 2) {
+                    System.out.println("22222");
+                    enemy.x = character.x + character.width + 10;
+                } else {
+                    enemy.x = x + width;
+                }
                 enemy.xH = enemy.x + 5;
             }
 
             if (enemy.x + enemy.width >= this.x && enemy.x + enemy.width <= this.x + width && enemy.y + enemy.height - 7 >= this.y && enemy.y + 7 <= this.y + height) {
-                enemy.x = x - 40;
+                if (num == 4) {
+                    System.out.println("44444");
+                    enemy.x = character.x - 10;
+                } else {
+                    enemy.x = x - 40;
+                }
                 enemy.xH = enemy.x + 5;
             }
 
             if (enemy.x + enemy.width - 7 >= this.x && enemy.x + 7 <= x + width && enemy.y >= y && enemy.y <= y + height) {
-                enemy.y = y + height;
+                if (num == 3) {
+                    System.out.println("33333");
+                    enemy.y = character.y + height + 10;
+                } else {
+                    enemy.y = y + height;
+                }
                 enemy.yH = enemy.y - 10;
             }
 
             if (enemy.x + enemy.width - 7 >= this.x && enemy.x + 7 <= this.x + width && enemy.y + enemy.height >= this.y && enemy.y + enemy.height <= this.y + height) {
-                enemy.y = y - 40;
+                if (num == 1) {
+                    System.out.println("11111");
+                    enemy.y = character.y - 10;
+                } else {
+                    enemy.y = y - 40;
+                }
                 enemy.yH = enemy.y - 10;
             }
         }
 
 
+    }
+
+    public void checkObjects(EnemySnyp enemy) {
+        if (character.startGame) {
+            if (enemy.x >= this.x && enemy.x <= this.x + width && enemy.y + enemy.height - 7 >= this.y && enemy.y + 7 <= this.y + height) {
+                if (num == 2) {
+                    System.out.println("22222");
+                    enemy.x = character.x + character.width + 10;
+                } else {
+                    enemy.x = x + width;
+                }
+                enemy.xH = enemy.x + 5;
+            }
+
+            if (enemy.x + enemy.width >= this.x && enemy.x + enemy.width <= this.x + width && enemy.y + enemy.height - 7 >= this.y && enemy.y + 7 <= this.y + height) {
+                if (num == 4) {
+                    System.out.println("44444");
+                    enemy.x = character.x - 10;
+                } else {
+                    enemy.x = x - 40;
+                }
+                enemy.xH = enemy.x + 5;
+            }
+
+            if (enemy.x + enemy.width - 7 >= this.x && enemy.x + 7 <= x + width && enemy.y >= y && enemy.y <= y + height) {
+                if (num == 3) {
+                    System.out.println("33333");
+                    enemy.y = character.y + height + 10;
+                } else {
+                    enemy.y = y + height;
+                }
+                enemy.yH = enemy.y - 10;
+            }
+
+            if (enemy.x + enemy.width - 7 >= this.x && enemy.x + 7 <= this.x + width && enemy.y + enemy.height >= this.y && enemy.y + enemy.height <= this.y + height) {
+                if (num == 1) {
+                    System.out.println("11111");
+                    enemy.y = character.y - 10;
+                } else {
+                    enemy.y = y - 40;
+                }
+                enemy.yH = enemy.y - 10;
+            }
+        }
+
+
+    }
+
+    public void checkObjects(FireBall ball) {
+        if (character.startGame) {
+            if (ball.x + ball.radius >= this.x && ball.x <= this.x + width && ball.y + ball.radius >= this.y && ball.y <= this.y + height) {
+                character.removeBall(ball.num);
+            }
+        }
     }
 
     /*public void update(long dt) {
