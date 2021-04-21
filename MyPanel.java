@@ -32,7 +32,7 @@ public class MyPanel extends JPanel implements MouseListener {
         //world.createTestWorld();
         world.createFinaleWorld();
         world.createEnemies();
-        world.createEnemySnyps();
+        //world.createEnemySnyps();
         world.createChests();
         System.out.println(x0 + ", " + y0 + " : " + xN + ", " + yN);
     }
@@ -75,7 +75,7 @@ public class MyPanel extends JPanel implements MouseListener {
 
         character.draw(g);
         world.drawEnemies(g);
-        world.drawEnemySnyps(g);
+        //world.drawEnemySnyps(g);
 
         character.drawHealth(g);
         character.drawGameOver(g);

@@ -35,9 +35,24 @@ public class FireBall {
         this.x += speed * (xR/Math.sqrt(xR*xR + yR*yR)) * dt;
         this.y += speed * (yR/Math.sqrt(xR*xR + yR*yR)) * dt;
 
-        if (x > 1000 || x < 0 || y > 1000 || y < 0) {
-            character.removeBall(num);
-        }
+       //if (x > 1000 || x < 0 || y > 1000 || y < 0) {
+       //    character.removeBall(num);
+       //}
         //System.out.println(x);
+    }
+
+    public void changeLocation(int x) {
+        if (character.startGame) {
+            if (x == 1) {
+                this.y = this.y + 1000;
+            } else if (x == 2) {
+                this.x = this.x - 1000;
+            } else if (x == 3) {
+                this.y = this.y - 1000;
+            } else if (x == 4) {
+                this.x = this.x + 1000;
+            }
+        }
+
     }
 }

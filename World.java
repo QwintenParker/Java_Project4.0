@@ -63,80 +63,6 @@ public class World {
     //}
 
     public void createFinaleWorld() {
-        /*//0.0
-        for (double i = 250; i <= 700;) {
-            walls.add(new Wall(i, 250, character, 50, 50, 0));
-            i = i + 50;
-        }
-
-        for (double i = 250; i <= 350;) {
-            walls.add(new Wall(i, 700, character, 50, 50, 0));
-            i = i + 50;
-        }
-
-        for (double i = 600; i <= 700;) {
-            walls.add(new Wall(i, 700, character, 50, 50, 0));
-            i = i + 50;
-        }
-
-        for (double i = 250; i <= 700;) {
-            walls.add(new Wall(250, i, character, 50, 50, 0));
-            walls.add(new Wall(700, i, character, 50, 50, 0));
-            i = i + 50;
-        }
-
-        for (double i = 700; i <= 1000;) {
-            walls.add(new Wall(350, i, character, 50, 50, 0));
-            walls.add(new Wall(600, i, character, 50, 50, 0));
-            i = i + 50;
-        }
-
-        //0.1
-        for (double i = 1050; i <= 1350;) {
-            walls.add(new Wall(350, i, character, 50, 50, 0));
-            walls.add(new Wall(600, i, character, 50, 50, 0));
-            i = i + 50;
-        }
-
-        for (double i = 0; i <= 350;) {
-            walls.add(new Wall(i, 1350, character, 50, 50, 0));
-            i = i + 50;
-        }
-
-        for (double i = 600; i <= 950;) {
-            walls.add(new Wall(i, 1350, character, 50, 50, 0));
-            i = i + 50;
-        }
-
-        for (double i = 0; i <= 950;) {
-            walls.add(new Wall(i, 1700, character, 50, 50, 0));
-            i = i + 50;
-        }
-
-        //1.1
-        for (double i = 1000; i <= 1950;) {
-            walls.add(new Wall(i, 1350, character, 50, 50, 0));
-            walls.add(new Wall(i, 1700, character, 50, 50, 0));
-            i = i + 50;
-        }
-        //2.1
-        for (double i = 2000; i <= 2950;) {
-            walls.add(new Wall(i, 1050, character, 50, 50, 0));
-            i = i + 50;
-        }
-
-        for (double i = 1050; i <= 1350;) {
-            walls.add(new Wall(2000, i, character, 50, 50, 0));
-            walls.add(new Wall(2950, i, character, 50, 50, 0));
-            i = i + 50;
-        }
-
-        for (double i = 1700; i <= 2000;) {
-            walls.add(new Wall(2000, i, character, 50, 50, 0));
-            walls.add(new Wall(2950, i, character, 50, 50, 0));
-            i = i + 50;
-        }*/
-
         //0.0
         walls.add(new Wall(250, 250, character, 500, 50, 0));
         walls.add(new Wall(250, 250, character, 50, 500, 0));
@@ -283,13 +209,13 @@ public class World {
     }
 
     public void createEnemies() {
-        //enemies.add(new Enemy(200, 700, character));
-        //enemies.add(new Enemy(-1500, 400, character));
-        //enemies.add(new Enemy(400, 100, character));
-        //enemies.add(new Enemy(1150, 200, character));
-        //enemies.add(new Enemy(1150, 900, character));
-        //enemies.add(new Enemy(1850, 200, character));
-        //enemies.add(new Enemy(1850, 900, character));
+        enemies.add(new Enemy(-850, 1450, character));
+        enemies.add(new Enemy(-850, 1530, character));
+        enemies.add(new Enemy(-850, 1610, character));
+        enemies.add(new Enemy(2200, 1200, character));
+        enemies.add(new Enemy(2800, 1200, character));
+        enemies.add(new Enemy(2200, 1800, character));
+        enemies.add(new Enemy(2800, 1800, character));
     }
 
     public void createEnemySnyps() {
@@ -407,6 +333,10 @@ public class World {
 
             for (int i = 0; i < enemySnyps.size(); i++) {
                 (enemySnyps.get(i)).changeLocation(x);
+            }
+
+            for (int i = 0; i < character.balls.size(); i++) {
+                (character.balls.get(i)).changeLocation(x);
             }
         }
 

@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 
 public class Character {
-    public File img1 = new File("C:\\Users\\zarez\\IdeaProjects\\JAVA_2.0-main\\JAVA_2.0-main\\failed.png");
+    public File img1 = new File("failed.png");
     public double x;
     public double y;
     public double constX;
@@ -49,8 +49,8 @@ public class Character {
         this.constY = y;
         this.width = 50;
         this.height = 50;
-        this.xRunningSpeed = 0.2;
-        this.yRunningSpeed = 0.2;
+        this.xRunningSpeed = 1;
+        this.yRunningSpeed = 1;
         this.runningX = 0;
         this.runningY = 0;
         this.characterHealth = 10000;
